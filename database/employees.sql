@@ -97,3 +97,12 @@ ON		employee.department_id = department.id;
 SELECT SUM(t.salary) AS totalSalary
 FROM (SELECT employee.id, department.salary
       FROM (employee JOIN department ON employee.department_id = department.id)) AS t;
+
+SELECT t.first_name, t.last_name, t.street, t.localNumber, t.zip_code, t.city
+FROM (
+    SELECT employee.first_name, employee.last_name, address.street,
+        address.localNumber, address.zip_code, address.city
+    FROM employee
+    JOIN address
+    ON employee.address_id = address.id) AS t
+WHERE zip_code = '11-100';
